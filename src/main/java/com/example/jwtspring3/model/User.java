@@ -19,6 +19,9 @@ public class User implements Serializable {
     private String username;
     @Column(nullable = false)
     private String password;
+    private String avatar;
+    private Long phone;
+    private String name;
 
     @Column(nullable = false)
     private String confirmPassword;
@@ -36,10 +39,13 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public User(Long id, String username, String password, String confirmPassword, boolean enabled, Set<Role> roles) {
+    public User(Long id, String username, String password, String avatar, Long phone, String name, String confirmPassword, boolean enabled, Set<Role> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.avatar = avatar;
+        this.phone = phone;
+        this.name = name;
         this.confirmPassword = confirmPassword;
         this.enabled = enabled;
         this.roles = roles;
@@ -94,5 +100,29 @@ public class User implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Long phone) {
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
