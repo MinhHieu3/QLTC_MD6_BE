@@ -41,4 +41,5 @@ public class WalletController {
     public ResponseEntity findById(@PathVariable Long id) {
         return new ResponseEntity<>(walletService.findById(id), HttpStatus.OK);
     }
+
 }
