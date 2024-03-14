@@ -14,16 +14,6 @@ public class WalletServiceImpl implements WalletService {
     WalletRepository walletRepository;
 
     @Override
-    public Iterable<Wallet> findAll(Long id, String name) {
-        if (name == null) {
-            return walletRepository.findAllByUser_Id(id);
-        } else if (id != null && name != null) {
-            return walletRepository.findAllByUser_IdAndNameContaining(id, name);
-        }
-        return walletRepository.findAllByUser_Id(id);
-    }
-
-    @Override
     public Iterable<Wallet> findAll() {
         return null;
     }
@@ -43,5 +33,11 @@ public class WalletServiceImpl implements WalletService {
         walletRepository.deleteById(id);
     }
 
-
+    @Override
+    public Iterable<Wallet> findAllByUser(Long id) {
+        if (id != null) {
+            return walletRepository.findAllByUser_Id(id);
+        }
+        return walletRepository.findAll();
+    }
 }

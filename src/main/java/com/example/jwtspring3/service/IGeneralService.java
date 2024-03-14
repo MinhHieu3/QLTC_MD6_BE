@@ -13,5 +13,5 @@ public interface IGeneralService<T> {
 
     void remove(Long id);
 
-    Iterable<Wallet> findAll(Long id, String name);
+
 }

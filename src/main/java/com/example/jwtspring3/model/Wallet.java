@@ -2,6 +2,8 @@ package com.example.jwtspring3.model;
 
 import jakarta.persistence.*;
 
+
+
 @Entity
 public class Wallet {
     @Id
@@ -12,19 +14,19 @@ public class Wallet {
     private String avatar;
     private Double money;
     @Column(length = 1000)
-    private String describe;
+    private String description;
     @ManyToOne
     private User user;
 
     public Wallet() {
     }
 
-    public Wallet(Long id, String name, String avatar, Double money, String describe, User user) {
+    public Wallet(Long id, String name, String avatar, Double money, String description, User user) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.money = money;
-        this.describe = describe;
+        this.description = description;
         this.user = user;
     }
 
@@ -60,12 +62,12 @@ public class Wallet {
         this.money = money;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {

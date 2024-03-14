@@ -14,9 +14,9 @@ public class WalletController {
     @Autowired
     WalletServiceImpl walletService;
 
-    @GetMapping
-    public ResponseEntity findAll(Long id, String name) {
-        return new ResponseEntity<>(walletService.findAll(id, name), HttpStatus.OK);
+    @GetMapping("{id}")
+    public ResponseEntity findAll(@PathVariable Long id) {
+        return new ResponseEntity<>(walletService.findAllByUser(id), HttpStatus.OK);
     }
 
     @PostMapping

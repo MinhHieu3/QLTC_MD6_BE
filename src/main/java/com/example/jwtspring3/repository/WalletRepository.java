@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface WalletRepository extends JpaRepository<Wallet,Long> {
     List<Wallet>findAllByUser_Id (Long id);
-    List<Wallet>findAllByUser_IdAndNameContaining(Long id , String name);
+
 }
