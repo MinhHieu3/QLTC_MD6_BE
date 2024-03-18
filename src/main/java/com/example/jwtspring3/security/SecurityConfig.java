@@ -70,11 +70,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/register", "/hello").permitAll()
-                        .requestMatchers("/users/**").hasAnyAuthority("ROLE_USER")
-                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                )
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/login", "/register", "/hello").permitAll()
+//                        .requestMatchers("/users/**").hasAnyAuthority("ROLE_USER")
+//                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+//                )
                 .exceptionHandling(customizer -> customizer.accessDeniedHandler(customAccessDeniedHandler()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
