@@ -18,6 +18,10 @@ public class WalletController {
     public ResponseEntity findAll(@PathVariable Long id) {
         return new ResponseEntity<>(walletService.findAllByUser(id), HttpStatus.OK);
     }
+    @GetMapping
+    public ResponseEntity findAllWallets() {
+        return new ResponseEntity<>(walletService.findAll(), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity save(@RequestBody Wallet wallet) {
