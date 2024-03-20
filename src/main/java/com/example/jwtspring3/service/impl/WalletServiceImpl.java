@@ -6,6 +6,7 @@ import com.example.jwtspring3.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,7 +16,7 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public Iterable<Wallet> findAll() {
-        return null;
+        return walletRepository.findAll();
     }
 
     @Override
@@ -33,11 +34,9 @@ public class WalletServiceImpl implements WalletService {
         walletRepository.deleteById(id);
     }
 
+
     @Override
-    public Iterable<Wallet> findAllByUser(Long id) {
-        if (id != null) {
-            return walletRepository.findAllByUser_Id(id);
-        }
-        return walletRepository.findAll();
+    public List<Wallet> findAllByUser(Long id) {
+        return walletRepository.findAllByUser_Id(id);
     }
 }
