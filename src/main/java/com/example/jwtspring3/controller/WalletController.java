@@ -2,21 +2,23 @@ package com.example.jwtspring3.controller;
 
 import com.example.jwtspring3.model.Wallet;
 import com.example.jwtspring3.service.impl.WalletServiceImpl;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("api/wallets")
+@RequestMapping("users/wallets")
 public class WalletController {
     @Autowired
     WalletServiceImpl walletService;
 
-    @GetMapping("{id}")
-    public ResponseEntity findAll(@PathVariable Long id) {
-        return new ResponseEntity<>(walletService.findAllByUser(id), HttpStatus.OK);
+    @GetMapping("/{idUser}")
+    public ResponseEntity findAll(@PathVariable Long idUser) {
+        return new ResponseEntity<>(walletService.findAllByUser(idUser), HttpStatus.OK);
     }
     @GetMapping
     public ResponseEntity findAllWallets() {
