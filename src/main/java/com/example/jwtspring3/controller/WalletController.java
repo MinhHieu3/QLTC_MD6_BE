@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("users/wallets")
+    @RequestMapping("users/wallets")
 public class WalletController {
     @Autowired
     WalletServiceImpl walletService;
@@ -43,22 +43,26 @@ public class WalletController {
         return new ResponseEntity<>(walletService.findById(id), HttpStatus.OK);
     }
     @PostMapping("/transfer")
-    public ResponseEntity transferMoney(@RequestParam Long senderId, @RequestParam Long receiverId, @RequestParam Double amount) {
-        Wallet senderWallet = walletService.findById(senderId).orElse(null);
-        Wallet receiverWallet = walletService.findById(receiverId).orElse(null);
-
-        if (senderWallet != null && receiverWallet != null && senderWallet.getMoney() >= amount) {
-            senderWallet.setMoney(senderWallet.getMoney() - amount);
-            walletService.save(senderWallet);
-
-            receiverWallet.setMoney(receiverWallet.getMoney() + amount);
-            walletService.save(receiverWallet);
-
-            return new ResponseEntity<>("Money transfer successful", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Money transfer failed. Please check your input and try again.", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> transferMoney(@RequestParam Long senderId, @RequestParam Long receiverId, @RequestParam Double amount) {
+        try {
+            Wallet senderWallet = walletService.findById(senderId).orElse(null);
+            Wallet receiverWallet= walletService.findById(receiverId).orElse(null);
+            if (senderWallet != null && receiverWallet != null) {
+                if (senderWallet.getMoney() >= amount) {
+                    senderWallet.setMoney(senderWallet.getMoney() - amount);
+                    receiverWallet.setMoney(receiverWallet.getMoney() + amount);
+                    walletService.save(senderWallet);
+                    walletService.save(receiverWallet);
+                    return ResponseEntity.ok("Money transfer successful");
+                } else {
+                    return ResponseEntity.badRequest().body("Insufficient balance in sender's wallet");
+                }
+            } else {
+                return ResponseEntity.badRequest().body("Sender's or receiver's wallet not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the transaction");
         }
     }
-
 
 }
