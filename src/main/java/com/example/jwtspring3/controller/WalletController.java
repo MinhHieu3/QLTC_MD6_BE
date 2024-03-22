@@ -39,7 +39,7 @@ public class WalletController {
         return new ResponseEntity<>("Delete done", HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/findByIdWallet")
+    @GetMapping("/{id}/findById")
     public ResponseEntity findById(@PathVariable Long id) {
         return new ResponseEntity<>(walletService.findById(id), HttpStatus.OK);
     }
