@@ -43,4 +43,12 @@ public class WalletServiceImpl implements WalletService {
             return walletRepository.findAll();
         }
     }
+
+    @Override
+    public void updateWalletMoney(Long walletId, Double newMoneyValue) {
+        Optional<Wallet> walletOptional = walletRepository.findById(walletId);
+        Wallet wallet = walletOptional.get();
+        wallet.setMoney(newMoneyValue);
+        walletRepository.save(wallet);
+    }
 }

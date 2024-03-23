@@ -47,5 +47,10 @@ public class DetailServiceImpl implements DetailService {
             return detailRepository.findAll();
         }
     }
+
+    @Override
+    public List<Detail> getDetailsByWalletId(Long walletId) {
+        return null;
+    }
 }
 

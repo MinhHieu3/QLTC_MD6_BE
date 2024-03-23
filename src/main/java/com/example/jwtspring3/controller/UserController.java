@@ -58,14 +58,12 @@ public class UserController {
         if (bindingResult.hasFieldErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        Iterable<User> users = userService.findAll();
-        for (User currentUser : users) {
-            if (currentUser.getUsername().equals(user.getUsername())) {
-                return new ResponseEntity<>("Username existed",HttpStatus.OK);
-            }
+        User existingUser = userService.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            return new ResponseEntity<>("Username already exists", HttpStatus.CONFLICT);
         }
         if (!userService.isCorrectConfirmPassword(user)) {
-            return new ResponseEntity<>("Input confirm password",HttpStatus.OK);
+            return new ResponseEntity<>("Input confirm password", HttpStatus.BAD_REQUEST);
         }
         if (user.getRoles() != null) {
             Role role = roleService.findByName("ROLE_ADMIN");
@@ -83,6 +81,8 @@ public class UserController {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
+
+
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {

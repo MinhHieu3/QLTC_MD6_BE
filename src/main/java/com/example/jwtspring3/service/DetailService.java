@@ -8,4 +8,6 @@ public interface DetailService extends IGeneralService<Detail> {
     List<Detail> findAllByAmount(Double amount);
 
     List<Detail> findAllByWallet(Long id);
+
+    List<Detail> getDetailsByWalletId(Long walletId);
 }

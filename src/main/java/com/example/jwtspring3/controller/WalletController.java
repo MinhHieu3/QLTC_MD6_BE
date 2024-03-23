@@ -33,6 +33,7 @@ public class WalletController {
     public ResponseEntity save(@PathVariable Long id, @RequestBody Wallet wallet) {
         wallet.setId(id);
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")
@@ -68,5 +69,9 @@ public class WalletController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the transaction");
         }
     }
-
+    @PutMapping
+    public ResponseEntity saveNewMoneyValues(Long walletId, Double newMoneyValue){
+        walletService.updateWalletMoney(walletId,newMoneyValue);
+        return new ResponseEntity<>("Set done",HttpStatus.OK);
+    }
 }
