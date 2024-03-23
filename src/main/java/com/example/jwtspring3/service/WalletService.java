@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface WalletService extends IGeneralService<Wallet> {
     List<Wallet> findAllByUser(Long id);
+    void updateWalletMoney(Long walletId, Double newMoneyValue);
 }

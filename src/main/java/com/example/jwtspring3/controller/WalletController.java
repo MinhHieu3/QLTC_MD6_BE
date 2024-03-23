@@ -33,6 +33,7 @@ public class WalletController {
     public ResponseEntity save(@PathVariable Long id, @RequestBody Wallet wallet) {
         wallet.setId(id);
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.OK);
+
     }
 
     @DeleteMapping("/{id}")
@@ -45,6 +46,7 @@ public class WalletController {
     public ResponseEntity findById(@PathVariable Long id) {
         return new ResponseEntity<>(walletService.findById(id), HttpStatus.OK);
     }
+<<<<<<< HEAD
 
     @PostMapping("/transfer")
     public ResponseEntity<String> transferMoney(@RequestParam Long senderId, @RequestParam Long receiverId, @RequestParam Double amount) {
@@ -69,4 +71,11 @@ public class WalletController {
         }
     }
 
+=======
+    @PutMapping
+    public ResponseEntity saveNewMoneyValues(Long walletId, Double newMoneyValue){
+        walletService.updateWalletMoney(walletId,newMoneyValue);
+        return new ResponseEntity<>("Set done",HttpStatus.OK);
+    }
+>>>>>>> db627d88c5e37071189ff1a185f4a745a704b64d
 }
