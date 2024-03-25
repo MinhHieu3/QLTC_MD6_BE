@@ -37,7 +37,11 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public List<Wallet> findAllByUser(Long id) {
-        return walletRepository.findAllByUser_Id(id);
+        if (id != null) {
+            return walletRepository.findAllByUser_Id(id);
+        } else {
+            return walletRepository.findAll();
+        }
     }
 
     @Override
