@@ -112,4 +112,8 @@ public class UserServiceImpl implements UserService {
     public boolean isCorrectConfirmPassword(User user) {
         return user.getPassword().equals(user.getConfirmPassword());
     }
+    @Override
+    public void remove(Long id) {
+        userRepository.deleteById(id);
+    }
 }

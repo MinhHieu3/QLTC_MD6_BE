@@ -120,4 +120,8 @@ public class UserController {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-}
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        userService.remove(id);
+        return new ResponseEntity<>("Delete done", HttpStatus.OK);
+    }}
