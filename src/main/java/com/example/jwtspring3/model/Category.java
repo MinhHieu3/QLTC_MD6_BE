@@ -11,14 +11,24 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String avatar;
 
     public Category() {
     }
-
-    public Category(Long id, String name) {
+    public Category(Long id, String name, String avatar) {
         this.id = id;
         this.name = name;
+        this.avatar = avatar;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 
     public Long getId() {
         return id;
