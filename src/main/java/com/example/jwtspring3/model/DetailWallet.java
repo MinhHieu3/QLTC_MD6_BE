@@ -13,7 +13,7 @@ public class DetailWallet {
     private Double money;
     private String description;
 
-    private LocalDate time;
+    private LocalDate localDate;
 
     @ManyToOne
     private Wallet wallet;
@@ -21,7 +21,7 @@ public class DetailWallet {
     private Category category;
 
     public DetailWallet() {
-        this.time = LocalDate.now();
+        this.localDate = LocalDate.now();
     }
 
 
@@ -29,9 +29,9 @@ public class DetailWallet {
         this.id = id;
         this.money = money;
         this.description = description;
-        this.time = LocalDate.now();
         this.wallet = wallet;
         this.category = category;
+        this.localDate = LocalDate.now();
     }
 
     public Long getId() {
@@ -58,12 +58,12 @@ public class DetailWallet {
         this.description = description;
     }
 
-    public LocalDate getTime() {
-        return time;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
-    public void setTime(LocalDate time) {
-        this.time = time;
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     public Wallet getWallet() {
