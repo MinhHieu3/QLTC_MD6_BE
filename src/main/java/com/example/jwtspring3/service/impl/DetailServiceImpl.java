@@ -1,6 +1,6 @@
 package com.example.jwtspring3.service.impl;
 
-import com.example.jwtspring3.model.Detail;
+import com.example.jwtspring3.model.DetailWallet;
 import com.example.jwtspring3.repository.DetailRepository;
 import com.example.jwtspring3.service.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,22 +15,17 @@ public class DetailServiceImpl implements DetailService {
     DetailRepository detailRepository;
 
     @Override
-    public List<Detail> findAllByAmount(Double amount) {
-        return detailRepository.findAllByAmount(amount);
-    }
-
-    @Override
-    public Iterable<Detail> findAll() {
+    public Iterable<DetailWallet> findAll() {
         return detailRepository.findAll();
     }
 
     @Override
-    public Detail save(Detail detail) {
+    public DetailWallet save(DetailWallet detail) {
         return detailRepository.save(detail);
     }
 
     @Override
-    public Optional<Detail> findById(Long id) {
+    public Optional<DetailWallet> findById(Long id) {
         return detailRepository.findById(id);
     }
 
@@ -40,7 +35,7 @@ public class DetailServiceImpl implements DetailService {
     }
 
     @Override
-    public List<Detail> findAllByWallet(Long id) {
+    public List<DetailWallet> findAllByWallet(Long id) {
         if (id != null) {
             return detailRepository.findAllByWallet_Id(id);
         } else {
@@ -49,7 +44,7 @@ public class DetailServiceImpl implements DetailService {
     }
 
     @Override
-    public List<Detail> getDetailsByWalletId(Long walletId) {
+    public List<DetailWallet> getDetailsByWalletId(Long walletId) {
         return null;
     }
 }

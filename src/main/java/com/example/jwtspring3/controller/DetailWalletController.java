@@ -1,6 +1,6 @@
 package com.example.jwtspring3.controller;
 
-import com.example.jwtspring3.model.Detail;
+import com.example.jwtspring3.model.DetailWallet;
 import com.example.jwtspring3.service.DetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/details")
-public class DetailController {
+public class DetailWalletController {
     @Autowired
     private DetailService detailService;
 
@@ -20,12 +20,12 @@ public class DetailController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Detail detail) {
+    public ResponseEntity save(@RequestBody DetailWallet detail) {
         return new ResponseEntity<>(detailService.save(detail), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable Long id, @RequestBody Detail detail) {
+    public ResponseEntity update(@PathVariable Long id, @RequestBody DetailWallet detail) {
         detail.setId(id);
         return new ResponseEntity<>(detailService.save(detail), HttpStatus.OK);
     }
@@ -37,7 +37,7 @@ public class DetailController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
-        return new ResponseEntity<>(detailService.findById(id), HttpStatus.OK);
+    public ResponseEntity findAllByWallet(@PathVariable Long id) {
+        return new ResponseEntity<>(detailService.findAllByWallet(id), HttpStatus.OK);
     }
 }

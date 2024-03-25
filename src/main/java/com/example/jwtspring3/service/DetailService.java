@@ -1,13 +1,13 @@
 package com.example.jwtspring3.service;
 
-import com.example.jwtspring3.model.Detail;
+import com.example.jwtspring3.model.DetailWallet;
 
 import java.util.List;
 
-public interface DetailService extends IGeneralService<Detail> {
-    List<Detail> findAllByAmount(Double amount);
+public interface DetailService extends IGeneralService<DetailWallet> {
 
-    List<Detail> findAllByWallet(Long id);
 
-    List<Detail> getDetailsByWalletId(Long walletId);
+    List<DetailWallet> findAllByWallet(Long id);
+
+    List<DetailWallet> getDetailsByWalletId(Long walletId);
 }
