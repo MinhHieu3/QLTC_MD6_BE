@@ -20,10 +20,6 @@ public class WalletController {
     public ResponseEntity findAll(@PathVariable Long idUser) {
         return new ResponseEntity<>(walletService.findAllByUser(idUser), HttpStatus.OK);
     }
-    @GetMapping
-    public ResponseEntity findAllWallets() {
-        return new ResponseEntity<>(walletService.findAll(), HttpStatus.OK);
-    }
 
     @PostMapping
     public ResponseEntity save(@RequestBody Wallet wallet) {
@@ -47,5 +43,9 @@ public class WalletController {
     public ResponseEntity findById(@PathVariable Long id) {
         return new ResponseEntity<>(walletService.findById(id), HttpStatus.OK);
     }
-
+    @PutMapping
+    public ResponseEntity saveNewMoneyValues(Long walletId, Double newMoneyValue){
+        walletService.updateWalletMoney(walletId,newMoneyValue);
+        return new ResponseEntity<>("Set done",HttpStatus.OK);
+    }
 }

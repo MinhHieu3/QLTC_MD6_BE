@@ -2,6 +2,7 @@ package com.example.jwtspring3.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 
 
 @Entity
@@ -17,8 +18,10 @@ public class Wallet {
     private String description;
     @ManyToOne
     private User user;
+    private LocalDate localDate;
 
     public Wallet() {
+        this.localDate = LocalDate.now();
     }
 
     public Wallet(Long id, String name, String avatar, Double money, String description, User user) {
@@ -28,6 +31,7 @@ public class Wallet {
         this.money = money;
         this.description = description;
         this.user = user;
+        this.localDate = LocalDate.now();
     }
 
     public Long getId() {
@@ -76,5 +80,13 @@ public class Wallet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 }
