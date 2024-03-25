@@ -3,8 +3,10 @@ package com.example.jwtspring3.controller;
 import com.example.jwtspring3.model.JwtResponse;
 import com.example.jwtspring3.model.Role;
 import com.example.jwtspring3.model.User;
+import com.example.jwtspring3.model.Wallet;
 import com.example.jwtspring3.service.RoleService;
 import com.example.jwtspring3.service.UserService;
+import com.example.jwtspring3.service.WalletService;
 import com.example.jwtspring3.service.impl.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,6 +43,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private WalletService walletService;
 
     @GetMapping("/users")
     public ResponseEntity<Iterable<User>> showAllUser() {
@@ -83,7 +88,6 @@ public class UserController {
     }
 
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
@@ -120,8 +124,16 @@ public class UserController {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
     @DeleteMapping("/users/{id}")
-    public ResponseEntity delete(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUserAndWallets(@PathVariable Long id) {
+        Optional<User> userOptional = userService.findById(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        }
+        List<Wallet> wallets = walletService.findByUserId(id);
+        walletService.deleteAllByUserId(id);
         userService.remove(id);
-        return new ResponseEntity<>("Delete done", HttpStatus.OK);
-    }}
+        return new ResponseEntity<>("User and their wallets deleted successfully", HttpStatus.OK);
+    }
+}

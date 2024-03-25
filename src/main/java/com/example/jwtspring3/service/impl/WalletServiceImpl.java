@@ -3,6 +3,7 @@ package com.example.jwtspring3.service.impl;
 import com.example.jwtspring3.model.Wallet;
 import com.example.jwtspring3.repository.WalletRepository;
 import com.example.jwtspring3.service.WalletService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
+
 public class WalletServiceImpl implements WalletService {
     @Autowired
     WalletRepository walletRepository;
@@ -46,5 +49,16 @@ public class WalletServiceImpl implements WalletService {
         Wallet wallet = walletOptional.get();
         wallet.setMoney(newMoneyValue);
         walletRepository.save(wallet);
+    }
+
+    @Override
+    public List<Wallet> findByUserId(Long userId) {
+        return walletRepository.findByUserId(userId);
+    }
+
+    @Override
+    public void deleteAllByUserId(Long userId) {
+        walletRepository.deleteAllByUserId(userId);
+
     }
 }
