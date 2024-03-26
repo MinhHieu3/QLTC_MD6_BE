@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping("api/categories")
@@ -37,4 +39,14 @@ public class CategoryController {
         categoryService.remove(id);
         return new ResponseEntity<>("Delete done", HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable Long id) {
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        if (!categoryOptional.isPresent()) {
+            return new ResponseEntity<>("Category not found", HttpStatus.NOT_FOUND);
+        }
+        Category category = categoryOptional.get();
+        return new ResponseEntity<>(category, HttpStatus.OK);
+    }
+
 }
